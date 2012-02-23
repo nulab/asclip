@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <h1>ASClip Example(Image button)</h1>
+    <p style="font-size:small; color: #777;">
+      flashVers:getClipString=getClipString&amp;onCopyCompleted=onCopyCompleted&amp;imageNormal=img/btn_global_url.png&imageOver=img/btn_global_url_on.png&imagePress=img/btn_global_url_on.png
+    </p>
+    <input id="src" type="text" value="http://www.nulab.co.jp/" size="50"/><br/>
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="138" height="36" id="asclip">
+	  <param value="./../bin/asclip.swf" name="movie">
+	  <param name="allowScriptAccess" value="always">
+	  <param name="quality" value="high">
+	  <param name="scale" value="noscale">
+	  <param name="FlashVars" value="getClipString=getClipString&amp;onCopyCompleted=onCopyCompleted&amp;imageNormal=img/btn_global_url.png&imageOver=img/btn_global_url_on.png&imagePress=img/btn_global_url_on.png">
+	  <param name="bgcolor" value="#eeeeee">
+	  <embed src="./../bin/asclip.swf" width="138" height="36" name="asclip" quality="high" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="getClipString=getClipString&amp;onCopyCompleted=onCopyCompleted&amp;imageNormal=img/btn_global_url.png&imageOver=img/btn_global_url_on.png&imagePress=img/btn_global_url_on.png" bgcolor="#eeeeee">
+	</object>    
+    <script>
+      var getClipString = function() {
+        return document.getElementById('src').value;
+      };
+      var onCopyCompleted = function() {
+        alert('The URL has been copied to Clipboard.');
+      };
+	</script>
+  </body>
+</html>
