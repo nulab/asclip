@@ -101,7 +101,11 @@ package
 			root.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
 				var s:String;
 				if (parameters[CALLBACK_GET_CLIPSTRING]) {
-					s = ExternalInterface.call(parameters[CALLBACK_GET_CLIPSTRING]);
+					s = ExternalInterface.call(parameters[CALLBACK_GET_CLIPSTRING], {
+						"altKey": e.altKey,
+						"ctrlKey": e.ctrlKey,
+						"shiftKey": e.shiftKey
+					});
 				} else {
 					s = parameters[CLIPSTRING];
 				}
