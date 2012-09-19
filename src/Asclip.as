@@ -100,18 +100,20 @@ package
 
 			root.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
 				var s:String;
+				var event:Object = {
+					"altKey": e.altKey,
+					"ctrlKey": e.ctrlKey,
+					"shiftKey": e.shiftKey
+				};
+
 				if (parameters[CALLBACK_GET_CLIPSTRING]) {
-					s = ExternalInterface.call(parameters[CALLBACK_GET_CLIPSTRING], {
-						"altKey": e.altKey,
-						"ctrlKey": e.ctrlKey,
-						"shiftKey": e.shiftKey
-					});
+					s = ExternalInterface.call(parameters[CALLBACK_GET_CLIPSTRING], event);
 				} else {
 					s = parameters[CLIPSTRING];
 				}
 				if (s) {
 					System.setClipboard(s);
-					if (parameters[CALLBACK_COPY_COMPLETED]) ExternalInterface.call(parameters[CALLBACK_COPY_COMPLETED]);
+					if (parameters[CALLBACK_COPY_COMPLETED]) ExternalInterface.call(parameters[CALLBACK_COPY_COMPLETED], event);
 				}
 			});
 
