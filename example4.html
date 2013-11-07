@@ -18,15 +18,16 @@
       var getClipString = function(e) {
         if (window.console) {
           console.log(e);
-        }        
-        return document.getElementById('src').value;
+        }
+        var msg = ['ctrKey', e.ctrlKey, 'shiftKey', e.shiftKey, 'altKey', e.altKey].join(':');        
+        return document.getElementById('src').value + ' ' + msg;
       };
       var onCopyCompleted = function(e) {
         if (window.console) {
           console.log(e);
         }
-        var msg = ['ctrKey:', e.ctrlKey, 'shiftKey:', e.shiftKey, 'altKey:', e.altKey].join('');
-        alert('The URL has been copied to Clipboard.' + msg);
+        var msg = ['ctrKey', e.ctrlKey, 'shiftKey', e.shiftKey, 'altKey', e.altKey].join(':');
+        alert('The URL has been copied to Clipboard.' + ' ' + msg);
       };
 
       var flashvars = {
