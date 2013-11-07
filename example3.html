@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+  </head>
+  <body>
+    <h1>ASClip Example(With SFWObject)</h1>
+    <p style="font-size:small; color: #777;">
+      flashVars:getClipString=getClipString&amp;onCopyCompleted=onCopyCompleted&amp;imageNormal=img/btn_global_url.png&amp;imageOver=img/btn_global_url_on.png&amp;imagePress=img/btn_global_url_on.png
+    </p>
+    <input id="src" type="text" value="http://nulab-inc.com" size="50"/><br/>
+    <div id="asclip_container"></div>
+    <script>
+
+      var getClipString = function() {
+        return document.getElementById('src').value;
+      };
+      var onCopyCompleted = function() {
+        alert('The URL has been copied to Clipboard.');
+      };
+
+      var flashvars = {
+      "getClipString" : "getClipString",
+      "onCopyCompleted" : "onCopyCompleted",
+      "imageNormal":"img/btn_global_url.png",
+      "imageOver":"img/btn_global_url_on.png",
+      "imagePress":"img/btn_global_url_on.png"
+      };
+
+      var params ={
+      "allowScriptAccess":"always",
+      "quality":"high",
+      "scale":"noscale",
+      "bgcolor":"#eeeeee"
+      };
+
+      var attributes = {
+      "id":"asclip"
+      };
+
+      var asclip = "./bin/asclip.swf";
+      swfobject.embedSWF(asclip, "asclip_container", "138", "36", "9.0.0","expressInstall.swf", flashvars,params,attributes);
+
+	</script>
+  </body>
+</html>
