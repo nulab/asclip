@@ -3,27 +3,30 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <title>ASClip Example(Key Event)</title>        
   </head>
   <body>
-    <h1>ASClip Example(With SFWObject) with key event</h1>
+    <h1>ASClip Example(Key Event)</h1>
     <p style="font-size:small; color: #777;">
       flashVars:getClipString=getClipString&amp;onCopyCompleted=onCopyCompleted&amp;imageNormal=img/btn_global_url.png&amp;imageOver=img/btn_global_url_on.png&amp;imagePress=img/btn_global_url_on.png
     </p>
     <input id="src" type="text" value="http://nulab-inc.com" size="50"/><br/>
     <div id="asclip_container"></div>
+    <br/><a href="./">Back to Top</a>    
     <script>
 
       var getClipString = function(e) {
         if (window.console) {
           console.log(e);
-        }
+        }        
         return document.getElementById('src').value;
       };
       var onCopyCompleted = function(e) {
         if (window.console) {
           console.log(e);
         }
-        alert('The URL has been copied to Clipboard.');
+        var msg = ['ctrKey:', e.ctrlKey, 'shiftKey:', e.shiftKey, 'altKey:', e.altKey].join('');
+        alert('The URL has been copied to Clipboard.' + msg);
       };
 
       var flashvars = {
