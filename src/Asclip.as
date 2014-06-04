@@ -31,14 +31,14 @@ package
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
 	import flash.net.URLRequest;
-import flash.system.Capabilities;
-import flash.system.System;
+	import flash.system.Capabilities;
+	import flash.system.System;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import flash.ui.Mouse;
 	import flash.ui.MouseCursor;
-	
+
 	public class Asclip extends Sprite {
 		public function Asclip() {
 			stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -68,55 +68,55 @@ import flash.system.System;
 				labelString.y = (stage.stageHeight - labelString.height)/2;
 			}
 
-            stage.addEventListener(MouseEvent.MOUSE_OUT, function(e:MouseEvent):void {
+			stage.addEventListener(MouseEvent.MOUSE_OUT, function(e:MouseEvent):void {
 				pressing = false;
 				if (imageNormal) imageNormal.visible = true;
 				if (imageOver) imageOver.visible = false;
 				if (imagePress) imagePress.visible = false;
 				Mouse.cursor = MouseCursor.AUTO;
 			});
-            stage.addEventListener(MouseEvent.MOUSE_OVER, function(e:MouseEvent):void {
+			stage.addEventListener(MouseEvent.MOUSE_OVER, function(e:MouseEvent):void {
 				if (imageNormal) imageNormal.visible = false;
 				if (imageOver) imageOver.visible = true;
 				if (imagePress) imagePress.visible = false;
 				Mouse.cursor = MouseCursor.BUTTON;
 			});
-            stage.addEventListener(MouseEvent.MOUSE_MOVE, function(e:MouseEvent):void {
+			stage.addEventListener(MouseEvent.MOUSE_MOVE, function(e:MouseEvent):void {
 				if (imageNormal) imageNormal.visible = false;
 				if (imageOver) imageOver.visible = pressing ? false : true;
 				if (imagePress) imagePress.visible = pressing ? true : false;
 			});
-            stage.addEventListener(MouseEvent.MOUSE_DOWN, function(e:MouseEvent):void {
+			stage.addEventListener(MouseEvent.MOUSE_DOWN, function(e:MouseEvent):void {
 				pressing = true;
 				if (imageNormal) imageNormal.visible = false;
 				if (imageOver) imageOver.visible = false;
 				if (imagePress) imagePress.visible = true;
 			});
-            stage.addEventListener(MouseEvent.MOUSE_UP, function(e:MouseEvent):void {
+			stage.addEventListener(MouseEvent.MOUSE_UP, function(e:MouseEvent):void {
 				pressing = false;
 				if (imageOver) imageOver.visible = false;
 				if (imageOver) imageOver.visible = true;
 				if (imagePress) imagePress.visible = false;
 			});
 
-            stage.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
+			stage.addEventListener(MouseEvent.CLICK, function(e:MouseEvent):void {
 				var s:String;
 				var event:Object = {
 					"altKey": e.altKey,
 					"ctrlKey": e.ctrlKey,
 					"shiftKey": e.shiftKey
 				};
-                if (isPepper) {
-                    if (isAltKey) {
-                        event["altKey"] = true;
-                    }
-                    if (isCtrlKey) {
-                        event["ctrlKey"] = true;
-                    }
-                    if (isShiftKey) {
-                        event["shiftKey"] = true;
-                    }
-                }
+				if (isPepper) {
+					if (isAltKey) {
+						event["altKey"] = true;
+					}
+					if (isCtrlKey) {
+						event["ctrlKey"] = true;
+					}
+					if (isShiftKey) {
+						event["shiftKey"] = true;
+					}
+				}
 
 				if (parameters[CALLBACK_GET_CLIPSTRING]) {
 					s = ExternalInterface.call(parameters[CALLBACK_GET_CLIPSTRING], event);
@@ -129,21 +129,21 @@ import flash.system.System;
 				}
 			});
 
-            if (Capabilities.manufacturer.toLocaleLowerCase() == "google pepper") {
-                isPepper = true;
-                var script:String = "function(clipId){" +
-                        "var asclip = document.getElementById(clipId);" +
-                        "var handler = function(e) {asclip.detectMetaKey(e.shiftKey,e.altKey,e.ctrlKey);};" +
-                        "window.addEventListener('keydown',handler);" +
-                        "window.addEventListener('keyup',handler);" +
-                        "}";
-                ExternalInterface.call(script, ExternalInterface.objectID);
-                ExternalInterface.addCallback("detectMetaKey", function(shiftKey:Boolean, altKey:Boolean, ctrlKey:Boolean):void {
-                    isShiftKey = shiftKey;
-                    isAltKey = altKey;
-                    isCtrlKey = ctrlKey;
-                });
-            }
+			if (Capabilities.manufacturer.toLocaleLowerCase() == "google pepper") {
+				isPepper = true;
+				var script:String = "function(clipId){" +
+						"var asclip = document.getElementById(clipId);" +
+						"var handler = function(e) {if (asclip != null && asclip.detectMetaKey != null) { asclip.detectMetaKey(e.shiftKey,e.altKey,e.ctrlKey); }};" +
+						"window.addEventListener('keydown',handler);" +
+						"window.addEventListener('keyup',handler);" +
+						"}";
+				ExternalInterface.call(script, ExternalInterface.objectID);
+				ExternalInterface.addCallback("detectMetaKey", function(shiftKey:Boolean, altKey:Boolean, ctrlKey:Boolean):void {
+					isShiftKey = shiftKey;
+					isAltKey = altKey;
+					isCtrlKey = ctrlKey;
+				});
+			}
 
 			var l:Sprite = new Sprite();
 			addChild(l);
@@ -199,11 +199,11 @@ import flash.system.System;
 		
 		private var pressing:Boolean = false;
 
-        private var isPepper:Boolean = false;
-        private var isShiftKey:Boolean = false;
-        private var isAltKey:Boolean = false;
-        private var isCtrlKey:Boolean = false;
-		
+		private var isPepper:Boolean = false;
+		private var isShiftKey:Boolean = false;
+		private var isAltKey:Boolean = false;
+		private var isCtrlKey:Boolean = false;
+
 		private static const IMAGE_NORMAL:String = "imageNormal";
 		private static const IMAGE_OVER:String = "imageOver";
 		private static const IMAGE_PRESS:String = "imagePress";
