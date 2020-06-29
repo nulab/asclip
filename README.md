@@ -1,3 +1,5 @@
+# This repository is not maintained. We also recommend that you stop using this library because Flash will not be available after 2020.
+
 ActionScript library for clipboard copy 
 ==================================================
 (Japanese follows English)
@@ -82,6 +84,8 @@ Who uses this ?
 2. [Backlog](http://backlogtool.com/) ([for Japanese user](http://www.backlog.jp))
 
 
+
+# このリポジトリはメンテナンスされていません。また、Flashは2020年以降利用できなくなるため、このライブラリーの利用をやめることをお勧めします。
 
 これは何？
 --------------------------------------
